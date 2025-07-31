@@ -12,14 +12,16 @@ namespace Games.API
         public const string Author = "Your Name";
         public const string ContactEmail = "";
 
-        protected override void Seed(GamesDbContext context)
-        {
-            // Seed PlayStatusEnum values
-            context.Set<PlayStatus>().SeedEnumValues<PlayStatus, PlayStatusEnum>(e => new PlayStatus(e));
-            // Seed DesirabilityTierEnum values
-            context.Set<DesirabilityTier>().SeedEnumValues<DesirabilityTier, DesirabilityTierEnum>(e => new DesirabilityTier(e));
-            // Add any additional seeding logic here if necessary
-            context.SaveChanges();
-        }
+        //protected override void Seed(GamesDbContext context)
+        //{
+        //    // Seed PlayStatusEnum values
+        //    context.PlayStatuses.SeedEnumValues<PlayStatus, PlayStatusEnum>(e => e);
+        //    // Seed DesirabilityTierEnum values
+        //    context.DesirabilityTiers.SeedEnumValues<DesirabilityTier, DesirabilityTierEnum>(e => e);
+        //    // Seed AttributeTypeEnum values
+        //    context.AttributeTypes.SeedEnumValues<AttributeType, AttributeTypeEnum>(e => e);
+            
+        //    context.SaveChanges();
+        //}
     }
 }
