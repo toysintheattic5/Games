@@ -19,7 +19,7 @@ namespace Games.API.Models.Domain
         public DesirabilityTier DesirabilityTier { get; set; }
         public List<Note> Notes { get; set; }
         public List<Uri> Reviews { get; set; }
-        public List<Developer> Publishers { get; set; }
+        public List<Publisher> Publishers { get; set; }
         public List<Developer> Developers { get; set; }
         public DateTime? ReleaseDate { get; set; }
         public List<Attribute> Attributes { get; set; } = new List<Attribute>();

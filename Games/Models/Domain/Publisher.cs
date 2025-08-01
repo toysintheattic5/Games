@@ -2,7 +2,7 @@
 
 namespace Games.API.Models.Domain
 {
-    public class Developer
+    public class Publisher
     {
         public int Id { get; set; }
         [MaxLength(255)]
