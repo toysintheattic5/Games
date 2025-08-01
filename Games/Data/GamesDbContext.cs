@@ -53,17 +53,17 @@ namespace Games.API.Data
                                    .Select(value => (DesirabilityTierEnum)value)
                                    .ToList()
                                    .ForEach(instance => DesirabilityTiers.Add(instance));
-                    await context.SaveChangesAsync(cancellationToken);
+                    await context.SaveChangesAsync();
                 });
 
 
-        public GamesDbContext() : base() { }
+        public GamesDbContext(DbContextOptions<GamesDbContext> options) : base(options) { }
 
 
         public DbSet<Attribute> Attributes { get; set; }
         public DbSet<AttributeType> AttributeTypes { get; set; }
         public DbSet<DesirabilityTier> DesirabilityTiers { get; set; }
-        public DbSet<Developer> Developers { get; set; }
+        public DbSet<Publisher> Developers { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Platform> Platforms { get; set; }
         public DbSet<PlayStatus> PlayStatuses { get; set; }
