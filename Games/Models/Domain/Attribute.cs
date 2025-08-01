@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Games.API.Models.DTO;
+using System.ComponentModel.DataAnnotations;
 
 namespace Games.API.Models.Domain
 {
@@ -21,6 +22,17 @@ namespace Games.API.Models.Domain
                 throw new ArgumentException("Invalid attribute type.", nameof(attributeType));
             Name = name;
             AttributeType = attributeType;
+        }
+
+        public Attribute(AttributeDto attributeDto)
+        {
+            if (attributeDto == null) throw new ArgumentNullException(nameof(attributeDto), "Attribute DTO cannot be null.");
+            if (string.IsNullOrEmpty(attributeDto.Name)) throw new ArgumentNullException(nameof(attributeDto), "Attribute name is required.");
+            if (!Enum.IsDefined(typeof(AttributeTypeEnum), attributeDto.AttributeType))
+                throw new ArgumentException("Invalid attribute type.", nameof(attributeDto.AttributeType));
+            Id = attributeDto.Id;
+            Name = attributeDto.Name;
+            AttributeType = attributeDto.AttributeType;
         }
     }
 }

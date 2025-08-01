@@ -10,7 +10,7 @@ namespace Games.API.Models.DTO
         public int Id { get; set; }
 
         [MaxLength(50)]
-        public required string Name { get; set; }
+        public string Name { get; set; }
 
         [Required]
         public virtual AttributeType AttributeType { get; set; }
