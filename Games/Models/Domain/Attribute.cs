@@ -14,6 +14,13 @@ namespace Games.API.Models.Domain
 
         public Attribute() { }
 
+        public Attribute(string name, AttributeTypeEnum attributeType)
+        {
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name), "Attribute name is required.");
+            if (!Enum.IsDefined(typeof(AttributeTypeEnum), attributeType))
+                throw new ArgumentException("Invalid attribute type.", nameof(attributeType));
+            Name = name;
+            AttributeType = attributeType;
+        }
     }
-
 }
