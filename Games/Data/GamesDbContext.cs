@@ -1,5 +1,8 @@
-﻿using Games.API.Models.Domain;
+﻿using Games.API.Models.Application;
+using Games.API.Models.Domain;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Reflection.Metadata;
 using Attribute = Games.API.Models.Domain.Attribute;
 
 namespace Games.API.Data
@@ -11,10 +14,51 @@ namespace Games.API.Data
             modelBuilder.Entity<Transaction>().Property(p => p.Price).HasPrecision(18, 2);
         }
 
-        public GamesDbContext(DbContextOptions options) : base (options)
-        {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder
+                .UseSqlServer(@"Server=ROGER-NONPC\\SQLEXPRESS;Database=GAMES_EF;Trusted_Connection=True;TrustServerCertificate=True")
+                .UseSeeding((context, _) =>
+                {
+                    Enum.GetValues(typeof(AttributeTypeEnum))
+                                   .Cast<object>()
+                                   .Select(value => (AttributeTypeEnum)value)
+                                   .ToList()
+                                   .ForEach(instance => AttributeTypes.Add(instance));
+                    Enum.GetValues(typeof(PlayStatusEnum))
+                                   .Cast<object>()
+                                   .Select(value => (PlayStatusEnum)value)
+                                   .ToList()
+                                   .ForEach(instance => PlayStatuses.Add(instance));
+                    Enum.GetValues(typeof(DesirabilityTierEnum))
+                                   .Cast<object>()
+                                   .Select(value => (DesirabilityTierEnum)value)
+                                   .ToList()
+                                   .ForEach(instance => DesirabilityTiers.Add(instance));
+                    context.SaveChanges();
+                })
+                .UseAsyncSeeding(async (context, _, cancellationToken) =>
+                {
+                    Enum.GetValues(typeof(AttributeTypeEnum))
+                                   .Cast<object>()
+                                   .Select(value => (AttributeTypeEnum)value)
+                                   .ToList()
+                                   .ForEach(instance => AttributeTypes.Add(instance));
+                    Enum.GetValues(typeof(PlayStatusEnum))
+                                   .Cast<object>()
+                                   .Select(value => (PlayStatusEnum)value)
+                                   .ToList()
+                                   .ForEach(instance => PlayStatuses.Add(instance));
+                    Enum.GetValues(typeof(DesirabilityTierEnum))
+                                   .Cast<object>()
+                                   .Select(value => (DesirabilityTierEnum)value)
+                                   .ToList()
+                                   .ForEach(instance => DesirabilityTiers.Add(instance));
+                    await context.SaveChangesAsync(cancellationToken);
+                });
 
-        }
+
+        public GamesDbContext() : base() { }
+
 
         public DbSet<Attribute> Attributes { get; set; }
         public DbSet<AttributeType> AttributeTypes { get; set; }
