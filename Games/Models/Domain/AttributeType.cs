@@ -23,7 +23,7 @@ namespace Games.API.Models.Domain
         [Required, MaxLength(25)] 
         public string Name { get; set; }
         [MaxLength(100)] 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
 
         public static implicit operator AttributeType(AttributeTypeEnum @enum) => new AttributeType(@enum);
