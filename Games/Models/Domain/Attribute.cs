@@ -7,7 +7,7 @@ namespace Games.API.Models.Domain
         public int Id { get; set; }
 
         [MaxLength(50)]
-        public string Name { get; }
+        public string Name { get; set; }
 
         public virtual AttributeType AttributeType { get; set; }
 
