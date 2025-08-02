@@ -17,6 +17,8 @@ namespace Games.API.Controllers
             _dbContext = context;
         }
 
+
+        [HttpGet]
         public IActionResult GetAll()
         {
             var publishers = _dbContext.Publishers.ToList();
@@ -29,6 +31,7 @@ namespace Games.API.Controllers
             return Ok(publishers);
         }
 
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             var Publisher = _dbContext.Publishers.Find(id);
@@ -41,6 +44,7 @@ namespace Games.API.Controllers
             return Ok(PublisherDto);
         }
 
+        [HttpPost]
         public IActionResult Create([FromBody] PublisherDto PublisherDto)
         {
             if (PublisherDto == null)
@@ -54,6 +58,7 @@ namespace Games.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = Publisher.Id }, new PublisherDto(Publisher));
         }
 
+        [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] PublisherDto PublisherDto)
         {
             if (PublisherDto == null)
@@ -74,6 +79,7 @@ namespace Games.API.Controllers
             return NoContent();
         }
 
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var Publisher = _dbContext.Publishers.Find(id);

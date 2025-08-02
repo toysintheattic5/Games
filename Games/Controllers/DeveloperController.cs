@@ -17,6 +17,7 @@ namespace Games.API.Controllers
             _dbContext = context;
         }
 
+        [HttpGet]
         public IActionResult GetAll()
         {
             var developers = _dbContext.Developers.ToList();
@@ -29,6 +30,7 @@ namespace Games.API.Controllers
             return Ok(developers);
         }
 
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             var developer = _dbContext.Developers.Find(id);
@@ -40,7 +42,8 @@ namespace Games.API.Controllers
 
             return Ok(developerDto);
         }
-                
+
+        [HttpPost]
         public IActionResult Create([FromBody] DeveloperDto developerDto)
         {
             if (developerDto == null)
@@ -54,6 +57,7 @@ namespace Games.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = developer.Id }, new DeveloperDto(developer));
         }
 
+        [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] DeveloperDto developerDto)
         {
             if (developerDto == null)
@@ -74,6 +78,7 @@ namespace Games.API.Controllers
             return NoContent();
         }
 
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var developer = _dbContext.Developers.Find(id);
