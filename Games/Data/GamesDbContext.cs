@@ -63,12 +63,13 @@ namespace Games.API.Data
         public DbSet<Attribute> Attributes { get; set; }
         public DbSet<AttributeType> AttributeTypes { get; set; }
         public DbSet<DesirabilityTier> DesirabilityTiers { get; set; }
-        public DbSet<Publisher> Developers { get; set; }
+        public DbSet<Developer> Developers { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Platform> Platforms { get; set; }
         public DbSet<PlayStatus> PlayStatuses { get; set; }
         public DbSet<Product> Products { get; set; }
         internal DbSet<ProductKey> ProductKeys { get; set; }
+        public DbSet<Publisher> Publishers { get; set; }
         public DbSet<SourceEntity> SourceEntities { get; set; }
         public DbSet<Source> Sources { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
